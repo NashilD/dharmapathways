@@ -13,7 +13,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 py-20 md:py-32">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Dharma Institute of Purpose
+              Dharma Pathways
             </h1>
             <p className="text-xl text-muted-foreground mb-6">
               Where opportunity meets direction

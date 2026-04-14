@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-primary-foreground rounded flex items-center justify-center text-primary font-bold text-lg">
                 D
               </div>
-              <span className="font-bold text-lg">Dharma</span>
+              <span className="font-bold text-lg">Dharma Pathways</span>
             </div>
             <p className="text-sm opacity-80">
               Research-driven institute understanding human pressures in modern institutions.

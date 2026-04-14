@@ -12,10 +12,10 @@ export default function AboutPage() {
         <section className="border-b border-border">
           <div className="max-w-6xl mx-auto px-4 py-20">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              About Dharma Institute of Purpose
+              About Dharma Pathways
             </h1>
             <p className="text-xl text-muted-foreground">
-              Research-driven guidance for clearer, safer, and more affordable education decisions.
+              Research-driven guidance for clearer, safer, and more affordable educational decisions.
             </p>
           </div>
         </section>
@@ -36,7 +36,7 @@ export default function AboutPage() {
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-4">Our Vision</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  A world where education decisions are informed, safe, and aligned with career
+                  A world where educational decisions are informed, safe, and aligned with career
                   potential and financial reality. Where &quot;missing middle&quot; families have the tools
                   and support to navigate complex trade-offs. Where education becomes truly
                   affordable and valuable for all.

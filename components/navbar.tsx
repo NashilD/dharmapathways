@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -10,8 +11,14 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-border bg-card">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold text-primary">
-          Dharma
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/DharamaPathways logo.jpeg"
+            alt="Dharma Pathways"
+            width={120}
+            height={40}
+            className="h-10 w-auto"
+          />
         </Link>
 
         {/* Desktop Menu */}
