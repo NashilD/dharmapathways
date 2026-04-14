@@ -1,0 +1,61 @@
+FRONTEND DIRECTORY STRUCTURE
+=============================
+
+To complete the frontend/backend split, copy these files to frontend/:
+
+FROM ROOT TO FRONTEND/APP/:
+- app/page.tsx → frontend/app/page.tsx
+- app/layout.tsx → frontend/app/layout.tsx
+- app/globals.css → frontend/app/globals.css
+- app/not-found.tsx → frontend/app/not-found.tsx
+- app/about/page.tsx → frontend/app/about/page.tsx
+- app/why-dharma/page.tsx → frontend/app/why-dharma/page.tsx
+- app/solutions/page.tsx → frontend/app/solutions/page.tsx
+- app/start/page.tsx → frontend/app/start/page.tsx
+- app/tools/page.tsx → frontend/app/tools/page.tsx
+- app/tools/reality-check/page.tsx → frontend/app/tools/reality-check/page.tsx
+- app/tools/cost-calculator/page.tsx → frontend/app/tools/cost-calculator/page.tsx
+- app/tools/route-compare/page.tsx → frontend/app/tools/route-compare/page.tsx
+- app/tools/fit-check/page.tsx → frontend/app/tools/fit-check/page.tsx
+- app/contact/page.tsx → frontend/app/contact/page.tsx
+- app/summary/page.tsx → frontend/app/summary/page.tsx
+
+FROM ROOT TO FRONTEND/COMPONENTS/:
+- components/navbar.tsx → frontend/components/navbar.tsx
+- components/footer.tsx → frontend/components/footer.tsx
+- components/navigation.tsx → frontend/components/navigation.tsx
+- components/tool-card.tsx → frontend/components/tool-card.tsx
+- components/hero.tsx → frontend/components/hero.tsx
+- components/overview.tsx → frontend/components/overview.tsx
+- components/philosophy.tsx → frontend/components/philosophy.tsx
+- components/offerings.tsx → frontend/components/offerings.tsx
+- components/cta.tsx → frontend/components/cta.tsx
+- components/ui/* → frontend/components/ui/
+
+FROM ROOT TO FRONTEND/HOOKS/:
+- hooks/use-mobile.tsx → frontend/hooks/use-mobile.tsx
+- hooks/use-toast.ts → frontend/hooks/use-toast.ts
+
+FROM ROOT TO FRONTEND/PUBLIC/:
+- public/* → frontend/public/
+
+FROM ROOT TO SHARED/:
+- shared/types.ts (NEW) → Route comparison, form types
+- shared/constants.ts (NEW) → Qualification types, faculties
+
+TO CREATE IN BACKEND:
+- backend/utils/scoring.ts → determineBestRoute() logic
+- backend/utils/calculations.ts → Cost calculator math
+- backend/utils/validators.ts → Input validation
+- backend/api/ → Future API routes
+- backend/types/ → Backend-specific types
+
+Configuration Files to Copy:
+- next.config.mjs → frontend/
+- tsconfig.json → frontend/ (with path aliases for @/shared)
+- tailwind.config.ts → frontend/
+- package.json → frontend/ (frontend dependencies only)
+
+Root package.json should have:
+- Minimal dependencies
+- Workspaces configured (if using monorepo structure)

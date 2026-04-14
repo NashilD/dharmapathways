@@ -1,0 +1,7 @@
+# Dharma Institute of Purpose
+User-agent: *
+Allow: /
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://dharmaio.org/sitemap.xml
