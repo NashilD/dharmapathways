@@ -7,24 +7,14 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Dharma Institute of Purpose',
+  title: 'Dharma Pathways',
   description: 'Research-driven institute understanding human pressures in modern institutions. Measurement frameworks, institutional audits, and programs for organizations and young professionals.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
+    icon: {
+      url: '/dharama-pathways-logo.jpeg',
+      type: 'image/jpeg',
+    },
     apple: '/apple-icon.png',
   },
 }

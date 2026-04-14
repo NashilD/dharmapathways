@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import Image from 'next/image'
 import { Mail, Linkedin, Twitter } from 'lucide-react'
 
 export default function Footer() {
@@ -11,9 +14,13 @@ export default function Footer() {
           {/* Brand Column */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary-foreground rounded flex items-center justify-center text-primary font-bold text-lg">
-                D
-              </div>
+              <Image
+                src="/dharama-pathways-logo.jpeg"
+                alt="Dharma Pathways"
+                width={40}
+                height={40}
+                className="h-8 w-auto"
+              />
               <span className="font-bold text-lg">Dharma Pathways</span>
             </div>
             <p className="text-sm opacity-80">
