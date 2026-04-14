@@ -13,7 +13,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/DharamaPathways logo.jpeg"
+            src="/dharma-pathways-logo.jpeg"
             alt="Dharma Pathways"
             width={120}
             height={40}

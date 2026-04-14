@@ -15,7 +15,7 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/DharamaPathways logo.jpeg"
+              src="/dharma-pathways-logo.jpeg"
               alt="Dharma Pathways"
               width={140}
               height={50}
