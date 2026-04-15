@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Navbar from '@/components/navbar';
+import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
 
@@ -128,7 +128,7 @@ export default function CostCalculator() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
+      <Navigation />
 
       <main className="flex-1">
         <div className="max-w-2xl mx-auto px-4 py-12">

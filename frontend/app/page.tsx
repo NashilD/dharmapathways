@@ -1,4 +1,4 @@
-import Navbar from '@/components/navbar';
+import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import ToolCard from '@/components/tool-card';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navigation />
 
       {/* Hero Section */}
       <section className="border-b border-border">
