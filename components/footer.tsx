@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Image
-                src="/dharama-pathways-logo.jpeg"
+                src="/dharama-pathways-logo-notext.PNG"
                 alt="Dharma Pathways"
                 width={40}
                 height={40}

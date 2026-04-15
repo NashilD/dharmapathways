@@ -12,10 +12,9 @@ export const metadata: Metadata = {
   generator: 'v0.app',
   icons: {
     icon: {
-      url: '/dharama-pathways-logo.jpeg',
-      type: 'image/jpeg',
+      url: '/dharama-pathways-logo-notext.PNG',
+      type: 'image/png',
     },
-    apple: '/apple-icon.png',
   },
 }
 
