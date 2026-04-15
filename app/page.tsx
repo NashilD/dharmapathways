@@ -6,55 +6,61 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background text-foreground">
       <Navbar />
 
-      {/* Hero Section - Centered, Logo-Prominent */}
-      <section className="min-h-[calc(100vh-64px)] flex flex-col items-center justify-center px-4 py-12 md:py-0 relative">
-        {/* Optional: Subtle background accent at top */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* HERO SECTION - Editorial Centered */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <section className="relative px-4 py-32 md:py-48 bg-background">
+        {/* Subtle gradient background */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl"></div>
         </div>
 
-        <div className="w-full max-w-2xl flex flex-col items-center text-center space-y-8 md:space-y-10">
-          {/* Logo - Prominent */}
-          <div className="flex justify-center pt-8 md:pt-0">
+        <div className="max-w-2xl mx-auto text-center space-y-10 md:space-y-12">
+          {/* Logo - Visual Anchor */}
+          <div className="mb-12 md:mb-16">
             <Image
               src="/dharama-pathways-logo-notext.PNG"
               alt="Dharma Pathways"
-              width={220}
-              height={220}
-              className="w-48 h-48 md:w-56 md:h-56 object-contain"
+              width={120}
+              height={120}
+              className="mx-auto w-32 h-32 object-contain"
               priority
             />
           </div>
 
-          {/* Brand Name */}
-          <div className="space-y-3 md:space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground tracking-tight">
+          {/* Heading - Maximum Breathing Room */}
+          <div className="mb-10 md:mb-14">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
               Dharma Pathways
             </h1>
-            <p className="text-2xl md:text-3xl text-muted-foreground font-light tracking-wide">
+          </div>
+
+          {/* Tagline - Soft Contrast */}
+          <div className="mb-10 md:mb-12">
+            <p className="text-xl md:text-2xl text-foreground/50 font-light">
               Where opportunity meets direction
             </p>
           </div>
 
-          {/* Description - Concise */}
-          <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-xl font-light">
-            Research-backed guidance to help students and families make clearer, safer, and more affordable educational decisions.
+          {/* Description - Limited Width, Readability Focus */}
+          <p className="text-base md:text-lg text-foreground/60 leading-relaxed max-w-lg mx-auto font-light mb-14 md:mb-16">
+            Research-backed guidance helping students and families make clearer, safer, more affordable educational decisions.
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 pt-4 md:pt-6 w-full sm:w-auto sm:justify-center">
+          {/* Buttons - Size-to-Content, Clear Gap */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/start"
-              className="bg-primary text-primary-foreground px-8 py-3.5 rounded-lg hover:opacity-85 transition-opacity font-medium text-center text-base md:text-lg shadow-md hover:shadow-lg"
+              className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors text-base md:text-lg"
             >
-              Start Guided Journey
+              Start Your Journey
             </Link>
             <Link
               href="/tools"
-              className="border-2 border-primary text-primary px-8 py-3.5 rounded-lg hover:bg-primary/5 transition-colors font-medium text-center text-base md:text-lg"
+              className="px-8 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors text-base md:text-lg"
             >
               Explore Tools
             </Link>
@@ -62,38 +68,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tools Grid - Generous Spacing */}
-      <section className="border-b border-border bg-background/50">
-        <div className="max-w-6xl mx-auto px-4 py-32 md:py-40">
-          <div className="max-w-2xl mx-auto mb-16 md:mb-20 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Our Tools
-            </h2>
-            <p className="text-lg text-muted-foreground font-light">
-              Research-backed frameworks designed to guide you through each step of your educational decision.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 md:gap-10">
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* SECTION BREAK - Visual Breathing Room */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <section className="px-4 py-24 md:py-40"></section>
+
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* TOOLS SECTION - 2x2 Grid */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <section className="px-4 py-32 md:py-48">
+        {/* Section Header */}
+        <div className="max-w-2xl mx-auto text-center mb-28 md:mb-36">
+          <h2 className="text-5xl md:text-7xl font-bold mb-8">Your Guidance Path</h2>
+          <p className="text-lg text-foreground/70 font-light">
+            Four research-backed tools to help you navigate your educational journey with confidence.
+          </p>
+        </div>
+
+        {/* Grid Container - 2 Columns */}
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-20">
             <ToolCard
-              title="Missing Middle Reality Check"
+              title="Reality Check"
               description="Understand your real affordability pressure and household financial situation"
               href="/tools/reality-check"
               icon="📊"
             />
             <ToolCard
-              title="True Cost Calculator"
-              description="Calculate the full cost of study including all hidden expenses"
+              title="True Cost"
+              description="Calculate the full cost of education including all hidden expenses"
               href="/tools/cost-calculator"
               icon="💰"
             />
             <ToolCard
-              title="Safer Route Compare"
-              description="Compare education options side-by-side to find the safest path"
+              title="Route Compare"
+              description="Compare education pathways side-by-side to find the safest option"
               href="/tools/route-compare"
               icon="🛣️"
             />
             <ToolCard
-              title="Career Fit Check"
+              title="Career Fit"
               description="Discover career paths that match your interests and work style"
               href="/tools/fit-check"
               icon="🎯"
@@ -102,32 +116,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Guided Journey CTA - Premium Minimal Design */}
-      <section className="border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 py-32 md:py-40">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center space-y-8">
-              <div className="space-y-4">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-                  Ready to find your path?
-                </h2>
-                <p className="text-xl text-foreground/70 font-light leading-relaxed">
-                  Our guided journey walks you through each tool step-by-step, helping you understand your options and make confident, informed decisions about your future.
-                </p>
-              </div>
-              <div className="pt-4">
-                <Link
-                  href="/start"
-                  className="inline-block bg-primary text-primary-foreground px-10 py-4 rounded-lg hover:opacity-85 transition-opacity font-medium text-lg shadow-md hover:shadow-lg"
-                >
-                  Begin Your Journey →
-                </Link>
-              </div>
-            </div>
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* SECTION BREAK */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <section className="px-4 py-24 md:py-40"></section>
+
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* CTA SECTION - Invitation with Breathing Room */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <section className="px-4 py-40 md:py-56 bg-muted/40">
+        <div className="max-w-2xl mx-auto text-center space-y-12">
+          <div className="space-y-8">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+              Ready to begin?
+            </h2>
+            <p className="text-lg text-foreground/60 font-light leading-relaxed">
+              Start your guided journey today. We'll walk you through each tool step-by-step to help you make confident, informed decisions about your future.
+            </p>
+          </div>
+
+          <div className="pt-6">
+            <Link
+              href="/start"
+              className="inline-flex px-10 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors text-lg md:text-xl"
+            >
+              Begin Your Journey →
+            </Link>
           </div>
         </div>
       </section>
 
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* FOOTER - Stability & Structure */}
+      {/* ═══════════════════════════════════════════════════════ */}
       <Footer />
     </div>
   );
