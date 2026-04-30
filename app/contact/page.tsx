@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -53,18 +54,18 @@ export default function ContactPage() {
       <Navigation />
 
       <main className="flex-1">
-        <div className="max-w-2xl mx-auto px-4 py-20">
-          <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold text-foreground mb-4">
+        <div className="max-w-2xl mx-auto px-4" style={{ paddingTop: 'var(--section-padding-lg)', paddingBottom: 'var(--section-padding-lg)' }}>
+          <div className="text-center" style={{ marginBottom: 'var(--space-xl)' }}>
+            <h1 style={{ fontSize: 'var(--text-hero)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-bold text-foreground">
               Book a Guidance Session
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p style={{ fontSize: 'var(--text-lead)', lineHeight: 'var(--line-height-base)' }} className="text-muted-foreground">
               Connect with our advisors to discuss your journey and get personalized recommendations.
             </p>
           </div>
 
           {submitted ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center" style={{ padding: 'var(--space-lg)', borderRadius: 'var(--card-radius)' }}>
               <p className="text-lg font-semibold text-green-900 mb-2">
                 Thank you for your interest!
               </p>
@@ -79,9 +80,9 @@ export default function ContactPage() {
               </Link>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-card border border-border rounded-lg p-8 space-y-6">
+            <form onSubmit={handleSubmit} className="bg-card border border-border rounded-lg p-8 space-y-6" style={{ padding: 'var(--space-lg)', borderRadius: 'var(--card-radius)', gap: 'var(--space-lg)' }}>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2" style={{ marginBottom: 'var(--space-xs)' }}>
                   Full Name
                 </label>
                 <input
@@ -91,12 +92,13 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   className="w-full border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={{ padding: 'var(--space-sm)' }}
                   placeholder="Your full name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2" style={{ marginBottom: 'var(--space-xs)' }}>
                   Email Address
                 </label>
                 <input
@@ -106,12 +108,13 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   className="w-full border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={{ padding: 'var(--space-sm)' }}
                   placeholder="your@email.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2" style={{ marginBottom: 'var(--space-xs)' }}>
                   Phone Number
                 </label>
                 <input
@@ -120,12 +123,13 @@ export default function ContactPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={{ padding: 'var(--space-sm)' }}
                   placeholder="Your phone number"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label className="block text-sm font-semibold text-foreground mb-2" style={{ marginBottom: 'var(--space-xs)' }}>
                   Message
                 </label>
                 <textarea
@@ -133,16 +137,14 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none h-32"
+                  style={{ padding: 'var(--space-sm)' }}
                   placeholder="Tell us about your situation and what you'd like to discuss..."
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold text-lg"
-              >
+              <Button type="submit" className="w-full">
                 Book Session
-              </button>
+              </Button>
 
               <p className="text-sm text-center text-muted-foreground">
                 We typically respond within 24 hours. Sessions are available online or by phone.
@@ -164,11 +166,13 @@ export default function ContactPage() {
         >
           <div
             className="bg-background border border-border rounded-lg max-w-md w-full p-8 shadow-lg"
+            style={{ padding: 'var(--space-lg)', borderRadius: 'var(--card-radius)', boxShadow: 'var(--shadow-default)' }}
             onClick={(e) => e.stopPropagation()}
           >
             <h2
               id="modal-title"
-              className="text-2xl font-bold text-foreground mb-4"
+              style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }}
+              className="font-bold text-foreground"
             >
               Contribution required
             </h2>
@@ -176,21 +180,13 @@ export default function ContactPage() {
               To book a session, you need to make a contribution of R75.
             </p>
 
-            <div className="flex gap-3">
-              <button
-                onClick={handleContinueBooking}
-                className="flex-1 bg-primary text-primary-foreground py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold"
-                aria-label="Continue with booking"
-              >
+            <div style={{ gap: 'var(--space-sm)' }} className="flex gap-3">
+              <Button onClick={handleContinueBooking} className="flex-1">
                 Continue
-              </button>
-              <button
-                onClick={handleCancelBooking}
-                className="flex-1 border border-border text-foreground py-3 rounded-lg hover:bg-card transition-colors font-semibold"
-                aria-label="Cancel booking"
-              >
+              </Button>
+              <Button onClick={handleCancelBooking} variant="outline" className="flex-1">
                 Cancel
-              </button>
+              </Button>
             </div>
           </div>
         </div>

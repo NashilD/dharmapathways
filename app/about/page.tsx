@@ -1,6 +1,7 @@
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function AboutPage() {
   return (
@@ -9,24 +10,24 @@ export default function AboutPage() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 py-20">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+        <section style={{ paddingTop: 'var(--section-padding-lg)', paddingBottom: 'var(--section-padding-lg)' }} className="border-b border-border">
+          <div className="max-w-6xl mx-auto px-4">
+            <h1 style={{ fontSize: 'var(--text-hero)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-lg)' }} className="font-bold text-foreground">
               About Dharma Pathways
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p style={{ fontSize: 'var(--text-lead)', lineHeight: 'var(--line-height-base)' }} className="text-muted-foreground">
               Research-driven guidance for clearer, safer, and more affordable educational decisions.
             </p>
           </div>
         </section>
 
         {/* Mission */}
-        <section className="border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 py-20">
-            <div className="grid md:grid-cols-2 gap-12">
+        <section style={{ paddingTop: 'var(--section-padding-lg)', paddingBottom: 'var(--section-padding-lg)' }}>
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid md:grid-cols-2" style={{ gap: 'var(--space-xl)' }}>
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-4">Our Mission</h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-bold text-foreground">Our Mission</h2>
+                <p style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height-base)' }} className="text-muted-foreground leading-relaxed">
                   We believe that education is a transformative investment—but only when it&apos;s
                   made with confidence, clarity, and a full understanding of the real costs and
                   options involved. Too many students and families make decisions without adequate
@@ -34,8 +35,8 @@ export default function AboutPage() {
                 </p>
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-4">Our Vision</h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-bold text-foreground">Our Vision</h2>
+                <p style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height-base)' }} className="text-muted-foreground leading-relaxed">
                   A world where educational decisions are informed, safe, and aligned with career
                   potential and financial reality. Where &quot;missing middle&quot; families have the tools
                   and support to navigate complex trade-offs. Where education becomes truly
@@ -47,10 +48,10 @@ export default function AboutPage() {
         </section>
 
         {/* Core Values */}
-        <section className="border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 py-20">
-            <h2 className="text-3xl font-bold text-foreground mb-12">Our Core Values</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+        <section style={{ paddingTop: 'var(--section-padding-lg)', paddingBottom: 'var(--section-padding-lg)' }}>
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-xl)' }} className="font-bold text-foreground">Our Core Values</h2>
+            <div className="grid md:grid-cols-3" style={{ gap: 'var(--space-lg)' }}>
               {[
                 {
                   title: 'Clarity',
@@ -86,8 +87,9 @@ export default function AboutPage() {
                 <div
                   key={i}
                   className="border border-border rounded-lg p-6"
+                  style={{ padding: 'var(--space-lg)', borderRadius: 'var(--card-radius)' }}
                 >
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                  <h3 style={{ fontSize: 'var(--text-card-title)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-sm)' }} className="font-semibold text-foreground">
                     {value.title}
                   </h3>
                   <p className="text-muted-foreground">{value.description}</p>
@@ -98,12 +100,12 @@ export default function AboutPage() {
         </section>
 
         {/* Approach */}
-        <section className="border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 py-20">
-            <h2 className="text-3xl font-bold text-foreground mb-12">Our Approach</h2>
-            <div className="space-y-8">
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+        <section style={{ paddingTop: 'var(--section-padding-lg)', paddingBottom: 'var(--section-padding-lg)' }}>
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-xl)' }} className="font-bold text-foreground">Our Approach</h2>
+            <div style={{ gap: 'var(--space-lg)' }} className="space-y-8">
+              <div className="border-l-4 border-primary pl-6" style={{ paddingLeft: 'var(--space-lg)' }}>
+                <h3 style={{ fontSize: 'var(--text-card-title)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-xs)' }} className="font-semibold text-foreground">
                   Step 1: Understand Pressure
                 </h3>
                 <p className="text-muted-foreground">
@@ -113,8 +115,8 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+              <div className="border-l-4 border-primary pl-6" style={{ paddingLeft: 'var(--space-lg)' }}>
+                <h3 style={{ fontSize: 'var(--text-card-title)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-xs)' }} className="font-semibold text-foreground">
                   Step 2: Calculate True Cost
                 </h3>
                 <p className="text-muted-foreground">
@@ -124,8 +126,8 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+              <div className="border-l-4 border-primary pl-6" style={{ paddingLeft: 'var(--space-lg)' }}>
+                <h3 style={{ fontSize: 'var(--text-card-title)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-xs)' }} className="font-semibold text-foreground">
                   Step 3: Compare Routes Safely
                 </h3>
                 <p className="text-muted-foreground">
@@ -135,8 +137,8 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="border-l-4 border-primary pl-6">
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+              <div className="border-l-4 border-primary pl-6" style={{ paddingLeft: 'var(--space-lg)' }}>
+                <h3 style={{ fontSize: 'var(--text-card-title)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-xs)' }} className="font-semibold text-foreground">
                   Step 4: Align with Career Fit
                 </h3>
                 <p className="text-muted-foreground">
@@ -150,22 +152,19 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="border-b border-border">
-          <div className="max-w-6xl mx-auto px-4 py-20">
-            <div className="bg-card border border-border rounded-lg p-12 text-center">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
+        <section style={{ paddingTop: 'var(--section-padding-lg)', paddingBottom: 'var(--section-padding-lg)' }}>
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="bg-card border border-border rounded-lg p-12 text-center" style={{ padding: 'var(--space-xl)', borderRadius: 'var(--card-radius)' }}>
+              <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-bold text-foreground">
                 Ready to Make a Confident Decision?
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-lg)' }} className="text-muted-foreground max-w-2xl mx-auto">
                 Start your guided decision journey today and gain clarity on your education and
                 career path.
               </p>
-              <Link
-                href="/start"
-                className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg hover:opacity-90 transition-opacity font-medium text-lg"
-              >
+              <Button variant="default">
                 Begin Your Journey
-              </Link>
+              </Button>
             </div>
           </div>
         </section>

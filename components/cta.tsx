@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Mail } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function CTA() {
   const [email, setEmail] = useState('')
@@ -18,21 +19,21 @@ export default function CTA() {
   }
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-primary/5">
+    <section id="contact" style={{ paddingTop: 'var(--section-padding-lg)', paddingBottom: 'var(--section-padding-lg)' }} className="bg-primary/5">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center" style={{ marginBottom: 'var(--space-xl)' }}>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4" style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }}>
             Ready to Work Together?
           </h2>
-          <p className="text-lg text-foreground/60">
+          <p className="text-lg text-foreground/60" style={{ fontSize: 'var(--text-lead)', lineHeight: 'var(--line-height-base)' }}>
             Whether you&apos;re an organization seeking institutional insights, a young professional needing guidance, or a partner interested in research collaboration, we&apos;d love to hear from you.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-background p-8 md:p-12 rounded-lg border border-border shadow-lg max-w-2xl mx-auto">
-          <div className="space-y-6">
+        <form onSubmit={handleSubmit} className="bg-background p-8 md:p-12 rounded-lg border border-border shadow-lg max-w-2xl mx-auto" style={{ padding: 'var(--space-lg)', borderRadius: 'var(--card-radius)', boxShadow: 'var(--shadow-default)' }}>
+          <div style={{ gap: 'var(--space-lg)' }} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2" style={{ marginBottom: 'var(--space-xs)' }}>
                 Email Address
               </label>
               <input
@@ -43,11 +44,12 @@ export default function CTA() {
                 required
                 placeholder="your@email.com"
                 className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                style={{ padding: 'var(--space-sm)' }}
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2" style={{ marginBottom: 'var(--space-xs)' }}>
                 Message
               </label>
               <textarea
@@ -58,21 +60,19 @@ export default function CTA() {
                 rows={5}
                 placeholder="Tell us about your needs, questions, or how we can collaborate..."
                 className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                style={{ padding: 'var(--space-sm)' }}
               />
             </div>
 
-            <div className="pt-4">
-              <button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold flex items-center justify-center gap-2"
-              >
+            <div style={{ paddingTop: 'var(--space-md)' }}>
+              <Button type="submit" className="w-full flex items-center justify-center gap-2">
                 <Mail size={20} />
                 Send Message
-              </button>
+              </Button>
             </div>
 
             {submitted && (
-              <div className="p-4 bg-primary/10 border border-primary/30 rounded-lg">
+              <div className="p-4 bg-primary/10 border border-primary/30 rounded-lg" style={{ padding: 'var(--space-md)', borderRadius: 'var(--card-radius)' }}>
                 <p className="text-primary font-medium text-center">
                   Thank you! We&apos;ve received your message and will be in touch soon.
                 </p>
@@ -80,7 +80,7 @@ export default function CTA() {
             )}
           </div>
 
-          <div className="mt-8 pt-8 border-t border-border">
+          <div style={{ marginTop: 'var(--space-lg)', paddingTop: 'var(--space-lg)', borderTop: '1px solid var(--surface-border)' }}>
             <p className="text-sm text-foreground/60 text-center">
               Or reach out directly at <span className="font-semibold text-primary">hello@dharmaio.org</span>
             </p>
@@ -88,7 +88,7 @@ export default function CTA() {
         </form>
 
         {/* Quick Contact Options */}
-        <div className="mt-12 grid sm:grid-cols-3 gap-6">
+        <div style={{ marginTop: 'var(--space-xl)' }} className="grid sm:grid-cols-3 gap-6">
           <div className="text-center">
             <h4 className="font-semibold text-foreground mb-2">Organizations</h4>
             <p className="text-sm text-foreground/60 mb-3">Learn about institutional audits and research partnerships</p>

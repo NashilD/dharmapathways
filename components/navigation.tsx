@@ -6,10 +6,10 @@ import Image from 'next/image'
 export default function Navigation() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto" style={{ paddingLeft: 'var(--container-padding-x)', paddingRight: 'var(--container-padding-x)' }}>
+        <div className="flex items-center justify-between" style={{ height: 'var(--space-xl)' }}>
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center" style={{ gap: 'var(--space-xs)' }}>
             <Image
               src="/dharama-pathways-logo.jpeg"
               alt="Dharma Pathways"
@@ -21,7 +21,7 @@ export default function Navigation() {
             />
           </Link>
 
-          <div className="flex items-center gap-10">
+          <div className="flex items-center" style={{ gap: 'var(--space-lg)' }}>
             <Link
               href="/"
               className="inline-flex min-w-[56px] justify-center text-base font-medium text-foreground hover:text-primary transition-colors"

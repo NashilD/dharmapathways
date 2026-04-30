@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
-import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function SummaryPage() {
   const [realityCheck, setRealityCheck] = useState<any>(null);
@@ -132,55 +132,54 @@ www.dharmainstitute.org
       <Navigation />
 
       <main className="flex-1">
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold text-foreground mb-4">
+        <div className="max-w-4xl mx-auto px-4" style={{ paddingTop: 'var(--section-padding-md)', paddingBottom: 'var(--section-padding-md)' }}>
+          <div style={{ marginBottom: 'var(--space-xl)' }}>
+            <h1 style={{ fontSize: 'var(--text-hero)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-bold text-foreground">
               Your Decision Journey Summary
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p style={{ fontSize: 'var(--text-lead)', lineHeight: 'var(--line-height-base)' }} className="text-muted-foreground">
               Here is a complete overview of all your assessments and recommendations.
             </p>
           </div>
 
           {!hasAnyData ? (
-            <div className="bg-card border border-border rounded-lg p-12 text-center">
-              <p className="text-lg text-muted-foreground mb-6">
+            <div className="bg-card border border-border rounded-lg p-12 text-center" style={{ padding: 'var(--space-xl)', borderRadius: 'var(--card-radius)' }}>
+              <p style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-lg)' }} className="text-muted-foreground mb-6">
                 You haven't completed any tools yet. Start the journey to build your summary.
               </p>
-              <Link
-                href="/start"
-                className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:opacity-90 transition-opacity font-medium"
-              >
-                Begin Your Journey
-              </Link>
+              <Button asChild>
+                <a href="/start">
+                  Begin Your Journey
+                </a>
+              </Button>
             </div>
           ) : (
-            <div className="space-y-8">
+            <div style={{ gap: 'var(--space-xl)' }} className="space-y-8">
               {realityCheck && (
-                <section className="border-l-4 border-primary pl-6 py-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <h2 className="text-2xl font-semibold text-foreground">
+                <section className="border-l-4 border-primary pl-6 py-6" style={{ paddingLeft: 'var(--space-lg)', paddingTop: 'var(--space-lg)', paddingBottom: 'var(--space-lg)' }}>
+                  <div className="flex items-start justify-between mb-4" style={{ marginBottom: 'var(--space-md)' }}>
+                    <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }} className="font-semibold text-foreground">
                       Reality Check Results
                     </h2>
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold" style={{ padding: 'var(--space-xs) var(--space-sm)', borderRadius: 'var(--card-radius)' }}>
                       Complete
                     </span>
                   </div>
 
-                  <div className="bg-card border border-border rounded-lg p-6 mb-6">
-                    <p className="text-sm text-muted-foreground mb-2">
+                  <div className="bg-card border border-border rounded-lg p-6 mb-6" style={{ padding: 'var(--space-lg)', marginBottom: 'var(--space-lg)', borderRadius: 'var(--card-radius)' }}>
+                    <p style={{ fontSize: 'var(--font-size-sm)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-xs)' }} className="text-muted-foreground mb-2">
                       Your Pressure Category
                     </p>
-                    <h3 className="text-2xl font-bold text-foreground mb-4">
+                    <h3 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-bold text-foreground">
                       {realityCheck.category}
                     </h3>
-                    <p className="text-foreground">
+                    <p style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height-base)' }} className="text-foreground">
                       Pressure Score: <strong>{realityCheck.total}/100</strong>
                     </p>
 
                     {realityCheck.missingMiddle && (
-                      <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded">
-                        <p className="text-sm text-yellow-900">
+                      <div style={{ marginTop: 'var(--space-md)', padding: 'var(--space-md)', borderRadius: 'var(--card-radius)' }} className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded">
+                        <p style={{ fontSize: 'var(--font-size-sm)' }} className="text-yellow-900">
                           Missing-middle pattern detected in your profile.
                         </p>
                       </div>
@@ -189,12 +188,12 @@ www.dharmainstitute.org
 
                   {realityCheck.drivers.length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-foreground mb-3">
+                      <h4 className="font-semibold text-foreground mb-3" style={{ marginBottom: 'var(--space-sm)' }}>
                         Key Pressure Drivers
                       </h4>
-                      <ul className="space-y-2 mb-6">
+                      <ul style={{ gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }} className="space-y-2 mb-6">
                         {realityCheck.drivers.map((d: string, i: number) => (
-                          <li key={i} className="text-foreground flex gap-2">
+                          <li key={i} className="text-foreground flex gap-2" style={{ gap: 'var(--space-sm)' }}>
                             <span className="text-primary">•</span>
                             {d}
                           </li>
@@ -204,12 +203,12 @@ www.dharmainstitute.org
                   )}
 
                   <div>
-                    <h4 className="font-semibold text-foreground mb-3">
+                    <h4 className="font-semibold text-foreground mb-3" style={{ marginBottom: 'var(--space-sm)' }}>
                       Recommended Next Steps
                     </h4>
-                    <ul className="space-y-2">
+                    <ul style={{ gap: 'var(--space-sm)' }} className="space-y-2">
                       {realityCheck.nextSteps.map((s: string, i: number) => (
-                        <li key={i} className="text-foreground flex gap-2">
+                        <li key={i} className="text-foreground flex gap-2" style={{ gap: 'var(--space-sm)' }}>
                           <span className="text-primary">→</span>
                           {s}
                         </li>
@@ -220,54 +219,56 @@ www.dharmainstitute.org
               )}
 
               {costCalc && (
-                <section className="border-l-4 border-primary pl-6 py-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <h2 className="text-2xl font-semibold text-foreground">
+                <section className="border-l-4 border-primary pl-6 py-6" style={{ paddingLeft: 'var(--space-lg)', paddingTop: 'var(--space-lg)', paddingBottom: 'var(--space-lg)' }}>
+                  <div className="flex items-start justify-between mb-4" style={{ marginBottom: 'var(--space-md)' }}>
+                    <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }} className="font-semibold text-foreground">
                       Cost Analysis
                     </h2>
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold" style={{ padding: 'var(--space-xs) var(--space-sm)', borderRadius: 'var(--card-radius)' }}>
                       Complete
                     </span>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-card border border-border rounded-lg p-4">
-                      <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                  <div className="grid md:grid-cols-2 gap-4 mb-6" style={{ gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
+                    <div className="bg-card border border-border rounded-lg p-4" style={{ padding: 'var(--space-md)', borderRadius: 'var(--card-radius)' }}>
+                      <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-xs)' }} className="text-muted-foreground uppercase tracking-wide">
                         Annual Cost
                       </p>
-                      <p className="text-2xl font-bold text-foreground">
+                      <p style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }} className="font-bold text-foreground">
                         R {costCalc.totalAnnual.toLocaleString()}
                       </p>
                     </div>
 
-                    <div className="bg-card border border-border rounded-lg p-4">
-                      <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                    <div className="bg-card border border-border rounded-lg p-4" style={{ padding: 'var(--space-md)', borderRadius: 'var(--card-radius)' }}>
+                      <p style={{ fontSize: 'var(--font-size-xs)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-xs)' }} className="text-muted-foreground uppercase tracking-wide">
                         Monthly Gap
                       </p>
                       <p
                         className={`text-2xl font-bold ${
                           costCalc.gap <= 0 ? 'text-green-600' : 'text-red-600'
                         }`}
+                        style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }}
                       >
                         {costCalc.gap > 0 ? '+' : ''}R{costCalc.gap.toLocaleString()}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-foreground mb-4">
+                  <p style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-md)' }} className="text-foreground mb-4">
                     <strong>Affordability Status:</strong> {costCalc.affordability}
                   </p>
 
                   {costCalc.flags.length > 0 && (
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                      <p className="text-sm font-semibold text-yellow-900 mb-2">
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4" style={{ padding: 'var(--space-md)', borderRadius: 'var(--card-radius)' }}>
+                      <p style={{ fontSize: 'var(--font-size-sm)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-sm)' }} className="font-semibold text-yellow-900 mb-2">
                         Cost Warnings
                       </p>
-                      <ul className="space-y-1">
+                      <ul style={{ gap: 'var(--space-xs)' }} className="space-y-1">
                         {costCalc.flags.map((f: string, i: number) => (
                           <li
                             key={i}
                             className="text-sm text-yellow-800 flex gap-2"
+                            style={{ gap: 'var(--space-sm)' }}
                           >
                             <span>⚠</span>
                             {f}
@@ -280,17 +281,17 @@ www.dharmainstitute.org
               )}
 
               {routeCompare && (
-                <section className="border-l-4 border-primary pl-6 py-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <h2 className="text-2xl font-semibold text-foreground">
+                <section className="border-l-4 border-primary pl-6 py-6" style={{ paddingLeft: 'var(--space-lg)', paddingTop: 'var(--space-lg)', paddingBottom: 'var(--space-lg)' }}>
+                  <div className="flex items-start justify-between mb-4" style={{ marginBottom: 'var(--space-md)' }}>
+                    <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }} className="font-semibold text-foreground">
                       Route Comparison
                     </h2>
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold" style={{ padding: 'var(--space-xs) var(--space-sm)', borderRadius: 'var(--card-radius)' }}>
                       Complete
                     </span>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4" style={{ gap: 'var(--space-md)' }}>
                     {[
                       {
                         letter: 'A',
@@ -310,19 +311,20 @@ www.dharmainstitute.org
                             ? 'border-green-400 bg-green-50'
                             : 'border-border'
                         }`}
+                        style={{ padding: 'var(--space-md)', borderRadius: 'var(--card-radius)' }}
                       >
-                        <h4 className="font-semibold text-foreground mb-2">
+                        <h4 className="font-semibold text-foreground mb-2" style={{ marginBottom: 'var(--space-xs)' }}>
                           {option.name}
                           {routeCompare.safer === letter && (
-                            <span className="ml-2 text-xs font-normal text-green-700 bg-green-100 px-2 py-1 rounded">
+                            <span className="ml-2 text-xs font-normal text-green-700 bg-green-100 px-2 py-1 rounded" style={{ marginLeft: 'var(--space-xs)', padding: 'var(--space-xs) var(--space-sm)', borderRadius: 'var(--card-radius)' }}>
                               Safer
                             </span>
                           )}
                         </h4>
-                        <p className="text-sm text-muted-foreground mb-2">
+                        <p style={{ fontSize: 'var(--font-size-sm)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-xs)' }} className="text-muted-foreground mb-2">
                           Cost: R {option.cost.toLocaleString()}
                         </p>
-                        <p className="text-sm text-muted-foreground">
+                        <p style={{ fontSize: 'var(--font-size-sm)', lineHeight: 'var(--line-height-base)' }} className="text-muted-foreground">
                           Risk Score: {risk}/100
                         </p>
                       </div>
@@ -332,33 +334,33 @@ www.dharmainstitute.org
               )}
 
               {fitCheck && (
-                <section className="border-l-4 border-primary pl-6 py-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <h2 className="text-2xl font-semibold text-foreground">
+                <section className="border-l-4 border-primary pl-6 py-6" style={{ paddingLeft: 'var(--space-lg)', paddingTop: 'var(--space-lg)', paddingBottom: 'var(--space-lg)' }}>
+                  <div className="flex items-start justify-between mb-4" style={{ marginBottom: 'var(--space-md)' }}>
+                    <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }} className="font-semibold text-foreground">
                       Career Fit Assessment
                     </h2>
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold" style={{ padding: 'var(--space-xs) var(--space-sm)', borderRadius: 'var(--card-radius)' }}>
                       Complete
                     </span>
                   </div>
 
-                  <div className="bg-card border border-border rounded-lg p-6 mb-6">
-                    <p className="text-sm text-muted-foreground mb-2">
+                  <div className="bg-card border border-border rounded-lg p-6 mb-6" style={{ padding: 'var(--space-lg)', marginBottom: 'var(--space-lg)', borderRadius: 'var(--card-radius)' }}>
+                    <p style={{ fontSize: 'var(--font-size-sm)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-xs)' }} className="text-muted-foreground mb-2">
                       Primary Career Fit
                     </p>
-                    <h3 className="text-2xl font-bold text-foreground">
+                    <h3 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)' }} className="font-bold text-foreground">
                       {fitCheck.primaryFit}
                     </h3>
                   </div>
 
                   {fitCheck.pathways.length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-foreground mb-3">
+                      <h4 className="font-semibold text-foreground mb-3" style={{ marginBottom: 'var(--space-sm)' }}>
                         Recommended Education Pathways
                       </h4>
-                      <ul className="space-y-2">
+                      <ul style={{ gap: 'var(--space-sm)' }} className="space-y-2">
                         {fitCheck.pathways.map((p: string, i: number) => (
-                          <li key={i} className="text-foreground flex gap-2">
+                          <li key={i} className="text-foreground flex gap-2" style={{ gap: 'var(--space-sm)' }}>
                             <span className="text-primary">{i + 1}.</span>
                             {p}
                           </li>
@@ -370,11 +372,11 @@ www.dharmainstitute.org
               )}
 
               {/* Overall Signal */}
-              <section className="border-l-4 border-accent pl-6 py-6 bg-accent/5 rounded-r-lg">
-                <h2 className="text-2xl font-semibold text-foreground mb-4">
+              <section className="border-l-4 border-accent pl-6 py-6 bg-accent/5 rounded-r-lg" style={{ paddingLeft: 'var(--space-lg)', paddingTop: 'var(--space-lg)', paddingBottom: 'var(--space-lg)', borderRadius: '0 var(--card-radius) var(--card-radius) 0' }}>
+                <h2 style={{ fontSize: 'var(--text-section)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-semibold text-foreground mb-4">
                   Your Overall Signal
                 </h2>
-                <p className="text-foreground leading-relaxed">
+                <p style={{ fontSize: 'var(--font-size-base)', lineHeight: 'var(--line-height-base)' }} className="text-foreground leading-relaxed">
                   Based on your assessments, you have a clearer picture of your affordability,
                   the true cost of your options, which routes are safest, and what careers align
                   with your interests. Use these insights to make a confident, informed decision
@@ -383,22 +385,19 @@ www.dharmainstitute.org
               </section>
 
               {/* Actions */}
-              <div className="border-t border-border pt-8 space-y-3">
-                <button
-                  onClick={generatePDF}
-                  className="w-full bg-primary text-primary-foreground py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold"
-                >
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: 'var(--space-xl)', gap: 'var(--space-sm)' }} className="border-t border-border pt-8 space-y-3">
+                <Button onClick={generatePDF} className="w-full">
                   Download Report
-                </button>
+                </Button>
 
-                <Link
-                  href="/contact"
-                  className="block w-full border border-primary text-primary py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors font-semibold text-center"
-                >
-                  Book a Guidance Session
-                </Link>
+                <Button variant="outline" asChild className="w-full">
+                  <a href="/contact">
+                    Book a Guidance Session
+                  </a>
+                </Button>
 
-                <button
+                <Button
+                  variant="ghost"
                   onClick={() => {
                     localStorage.removeItem('dharma_reality_check');
                     localStorage.removeItem('dharma_cost_calculator');
@@ -406,10 +405,10 @@ www.dharmainstitute.org
                     localStorage.removeItem('dharma_fit_check');
                     window.location.reload();
                   }}
-                  className="w-full border border-border text-foreground py-3 rounded-lg hover:bg-card transition-colors font-semibold"
+                  className="w-full"
                 >
                   Clear Results & Start Over
-                </button>
+                </Button>
               </div>
             </div>
           )}

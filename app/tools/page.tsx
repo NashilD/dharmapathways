@@ -8,15 +8,15 @@ export default function ToolsHub() {
       <Navigation />
 
       <main className="flex-1">
-        <div className="max-w-6xl mx-auto px-4 py-14 md:py-20">
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
+        <div className="max-w-6xl mx-auto px-4" style={{ paddingTop: 'var(--section-padding-md)', paddingBottom: 'var(--section-padding-md)' }}>
+          <h1 style={{ fontSize: 'var(--text-hero)', lineHeight: 'var(--heading-line-height)', marginBottom: 'var(--space-md)' }} className="font-bold tracking-tight text-foreground">
             Decision-Making Tools
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground mb-10 md:mb-12 max-w-3xl">
+          <p style={{ fontSize: 'var(--text-lead)', lineHeight: 'var(--line-height-base)', marginBottom: 'var(--space-xl)' }} className="text-muted-foreground max-w-3xl">
             Our research-backed tools help you understand your affordability, compare options, and make confident education decisions.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 'var(--space-lg)' }}>
             <ToolCard
               title="Missing Middle Reality Check"
               description="Assess your real affordability pressure by analyzing household income, expenses, dependents, and support levels."
