@@ -24,7 +24,7 @@ export default function Home() {
                   Safer, smarter education decisions
                 </div>
 
-                <div className="max-w-3xl mx-auto lg:mx-0" style={{ gap: 'var(--space-lg)' }} className="space-y-6">
+                <div className="max-w-3xl mx-auto lg:mx-0 space-y-6">
                   <div className="flex justify-center lg:justify-start">
                     <Image
                       src="/dharama-pathways-logo-notext.PNG"
@@ -45,11 +45,15 @@ export default function Home() {
                 </div>
 
                 <div style={{ marginTop: 'var(--space-xl)' }} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                  <Button variant="default">
-                    Start Your Journey
+                  <Button variant="default" asChild>
+                    <Link href="/start">
+                      Start Your Journey
+                    </Link>
                   </Button>
-                  <Button variant="outline">
-                    Explore Tools
+                  <Button variant="outline" asChild>
+                    <Link href="/tools">
+                      Explore Tools
+                    </Link>
                   </Button>
                 </div>
 
@@ -187,15 +191,16 @@ export default function Home() {
               Start with the tool that matches your stage and get step-by-step support for the next phase of your education journey.
             </p>
             <div style={{ marginTop: 'var(--space-xl)' }} className="flex flex-col sm:flex-row justify-center gap-5">
-              <Button variant="default">
-                Begin Your Journey
+              <Button variant="default" asChild>
+                <Link href="/start">
+                  Begin Your Journey
+                </Link>
               </Button>
-              <Link
-                href="/tools"
-                className="inline-flex items-center justify-center rounded-full border border-primary/40 px-8 py-3 text-sm font-semibold text-primary transition hover:bg-primary/5"
-              >
-                View All Tools
-              </Link>
+              <Button variant="outline" asChild>
+                <Link href="/tools">
+                  View All Tools
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
