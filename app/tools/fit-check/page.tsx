@@ -4,18 +4,16 @@ import { useState, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
-
-interface FitResult {
-  interests: Record<string, number>;
-  workStyle: Record<string, number>;
-  primaryFit: string;
-  secondaryFit: string;
-  pathways: string[];
-  warnings: string[];
-}
+import type { FitResult, CareerInterests, CareerWorkStyle } from '@/backend/types';
+import {
+  calculateCareerFit,
+  getTopCareerFits,
+  getPathwaysForCareer,
+  generateCareerWarnings,
+} from '@/backend/career';
 
 export default function CareerFitCheck() {
-  const [interests, setInterests] = useState({
+  const [interests, setInterests] = useState<CareerInterests>({
     analytical: 50,
     creative: 50,
     people: 50,
@@ -23,7 +21,7 @@ export default function CareerFitCheck() {
     entrepreneurial: 50,
   });
 
-  const [workStyle, setWorkStyle] = useState({
+  const [workStyle, setWorkStyle] = useState<CareerWorkStyle>({
     structure: 50,
     flexibility: 50,
     autonomy: 50,
@@ -52,66 +50,16 @@ export default function CareerFitCheck() {
   };
 
   const calculateFit = () => {
-    const careerFits: Record<string, number> = {
-      'Software Engineering': 0,
-      'Data Science': 0,
-      'Business/Finance': 0,
-      'Healthcare': 0,
-      'Education': 0,
-      'Creative Industries': 0,
-      'Entrepreneurship': 0,
-      'Engineering': 0,
-      'Sales': 0,
-      'Non-Profit/Social Impact': 0,
-    };
-
-    // Score each career based on interests and work style
-    careerFits['Software Engineering'] =
-      interests.analytical * 0.4 + workStyle.autonomy * 0.3 + interests.hands_on * 0.3;
-
-    careerFits['Data Science'] =
-      interests.analytical * 0.4 + interests.creative * 0.3 + workStyle.structure * 0.3;
-
-    careerFits['Business/Finance'] =
-      interests.analytical * 0.3 + interests.entrepreneurial * 0.4 + workStyle.leadership * 0.3;
-
-    careerFits['Healthcare'] =
-      interests.people * 0.4 + interests.analytical * 0.3 + workStyle.teamwork * 0.3;
-
-    careerFits['Education'] =
-      interests.people * 0.4 + interests.creative * 0.3 + workStyle.structure * 0.3;
-
-    careerFits['Creative Industries'] =
-      interests.creative * 0.4 + workStyle.flexibility * 0.4 + interests.entrepreneurial * 0.2;
-
-    careerFits['Entrepreneurship'] =
-      interests.entrepreneurial * 0.5 + workStyle.autonomy * 0.3 + workStyle.flexibility * 0.2;
-
-    careerFits['Engineering'] =
-      interests.hands_on * 0.4 + interests.analytical * 0.4 + workStyle.structure * 0.2;
-
-    careerFits['Sales'] =
-      interests.people * 0.4 + interests.entrepreneurial * 0.3 + workStyle.flexibility * 0.3;
-
-    careerFits['Non-Profit/Social Impact'] =
-      interests.people * 0.4 + interests.creative * 0.3 + workStyle.teamwork * 0.3;
-
-    // Find top 2 fits
-    const sorted = Object.entries(careerFits).sort((a, b) => b[1] - a[1]);
-    const primaryFit = sorted[0][0];
-    const secondaryFit = sorted[1][0];
-
-    // Suggest pathways
-    const pathways = getPathwaysForCareer(primaryFit);
-
-    // Generate warnings
-    const warnings = generateWarnings(interests, workStyle);
+    const careerFits = calculateCareerFit(interests, workStyle);
+    const { primary, secondary } = getTopCareerFits(careerFits);
+    const pathways = getPathwaysForCareer(primary);
+    const warnings = generateCareerWarnings(interests, workStyle);
 
     const finalResult: FitResult = {
       interests,
       workStyle,
-      primaryFit,
-      secondaryFit,
+      primaryFit: primary,
+      secondaryFit: secondary,
       pathways,
       warnings,
     };
@@ -119,100 +67,6 @@ export default function CareerFitCheck() {
     setResult(finalResult);
     localStorage.setItem('dharma_fit_check', JSON.stringify(finalResult));
     setShowResult(true);
-  };
-
-  const getPathwaysForCareer = (career: string): string[] => {
-    const pathways: Record<string, string[]> = {
-      'Software Engineering': [
-        'Bachelor in Computer Science',
-        'Bootcamp + Portfolio',
-        'Self-taught + Projects',
-        'Bachelor in Engineering (Software focus)',
-      ],
-      'Data Science': [
-        'Bachelor in Mathematics/Statistics',
-        'Data Science Bootcamp',
-        'Bachelor in Computer Science + specialized courses',
-        'Online Data Science Certificate',
-      ],
-      'Business/Finance': [
-        'Bachelor in Commerce/Business',
-        'MBA (after work experience)',
-        'CFA Program',
-        'Accounting Qualification',
-      ],
-      'Healthcare': [
-        'Bachelor in Nursing',
-        'Medicine (6 years)',
-        'Pharmacy',
-        'Allied Health Professions',
-      ],
-      'Education': [
-        'Bachelor in Education',
-        'Bachelor in specific subject + PGCE',
-        'Early Childhood Development',
-        'Adult Education Diploma',
-      ],
-      'Creative Industries': [
-        'Bachelor of Arts (Design/Media)',
-        'Visual Arts Diploma',
-        'Film & Television Production',
-        'Creative Portfolio + Experience',
-      ],
-      'Entrepreneurship': [
-        'Bachelor of Commerce',
-        'Business Bootcamp',
-        'Self-directed learning + mentorship',
-        'MBA (later)',
-      ],
-      'Engineering': [
-        'Bachelor in Engineering',
-        'Diploma in Engineering',
-        'Technical Training Certificate',
-        'Apprenticeship programs',
-      ],
-      'Sales': [
-        'Bachelor in Business/Commerce',
-        'Sales Certification',
-        'On-the-job training',
-        'Sales Academy programs',
-      ],
-      'Non-Profit/Social Impact': [
-        'Bachelor in Social Sciences',
-        'Development Studies',
-        'Public Administration',
-        'NGO Leadership programs',
-      ],
-    };
-
-    return pathways[career] || ['Explore relevant degree programs', 'Consider certifications'];
-  };
-
-  const generateWarnings = (
-    interests: Record<string, number>,
-    workStyle: Record<string, number>
-  ): string[] => {
-    const warnings: string[] = [];
-
-    if (interests.analytical < 30 && interests.hands_on < 30) {
-      warnings.push(
-        'Consider careers focused on people or creative skills rather than technical work'
-      );
-    }
-
-    if (workStyle.structure < 25 && workStyle.flexibility < 25) {
-      warnings.push('Your work style preferences are unclear—consider exploring various work environments');
-    }
-
-    if (interests.entrepreneurial > 70 && workStyle.leadership < 40) {
-      warnings.push('You show entrepreneurial interest but low leadership preference—consider collaborative partnerships');
-    }
-
-    if (interests.people > 70 && workStyle.autonomy > 70) {
-      warnings.push('Balance team collaboration with independent work in your career choice');
-    }
-
-    return warnings;
   };
 
   const interestFields = [

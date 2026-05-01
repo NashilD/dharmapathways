@@ -4,18 +4,11 @@ import { useState, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
-
-interface CostResult {
-  totalAnnual: number;
-  monthlyCost: number;
-  availableMonthly: number;
-  gap: number;
-  affordability: string;
-  flags: string[];
-}
+import type { CostInput, CostResult } from '@/backend/types';
+import { calculateCostBreakdown, getCostNextSteps } from '@/backend/calculations';
 
 export default function CostCalculator() {
-  const [data, setData] = useState({
+  const [data, setData] = useState<CostInput>({
     tuition: 0,
     accommodation: 0,
     transport: 0,
@@ -43,76 +36,10 @@ export default function CostCalculator() {
   };
 
   const calculate = () => {
-    const totalAnnual =
-      data.tuition +
-      data.accommodation +
-      data.transport +
-      data.food +
-      data.devices +
-      data.dataCost +
-      data.personal +
-      data.other;
-
-    const monthlyCost = Math.round(totalAnnual / 12);
-    const availableMonthly = data.income + data.support;
-    const gap = monthlyCost - availableMonthly;
-
-    let affordability = 'Affordable';
-    if (gap > 5000) affordability = 'Not Sustainable';
-    else if (gap > 2000) affordability = 'High Risk';
-    else if (gap > 0) affordability = 'Tight';
-
-    const flags: string[] = [];
-    if (data.devices < 5000 && data.devices > 0)
-      flags.push('Device costs may be underestimated');
-    if (data.dataCost < 200 && data.dataCost > 0)
-      flags.push('Data costs may be underestimated');
-    if (data.food < 1500 && data.food > 0)
-      flags.push('Food costs may be underestimated');
-    if (totalAnnual === 0)
-      flags.push('No costs entered yet');
-
-    const finalResult: CostResult = {
-      totalAnnual,
-      monthlyCost,
-      availableMonthly,
-      gap,
-      affordability,
-      flags,
-    };
-
-    setResult(finalResult);
-    localStorage.setItem('dharma_cost_calculator', JSON.stringify(finalResult));
+    const result = calculateCostBreakdown(data);
+    setResult(result);
+    localStorage.setItem('dharma_cost_calculator', JSON.stringify(result));
     setShowResult(true);
-  };
-
-  const getNextSteps = (affordability: string): string[] => {
-    if (affordability === 'Not Sustainable')
-      return [
-        'Do not commit to this option without significant changes',
-        'Explore lower-cost alternatives urgently',
-        'Compare safer routes immediately',
-      ];
-
-    if (affordability === 'High Risk')
-      return [
-        'Proceed with extreme caution',
-        'Secure additional support before committing',
-        'Stress-test other options',
-      ];
-
-    if (affordability === 'Tight')
-      return [
-        'Plan carefully for unexpected costs',
-        'Keep a financial buffer of at least 3 months',
-        'Review all expenses quarterly',
-      ];
-
-    return [
-      'Continue planning confidently',
-      'Validate all assumptions',
-      'Ensure long-term sustainability',
-    ];
   };
 
   const costFields = [
@@ -291,7 +218,7 @@ export default function CostCalculator() {
                   Recommended Next Steps
                 </h3>
                 <ul className="space-y-2">
-                  {getNextSteps(result.affordability).map((step, i) => (
+                  {getCostNextSteps(result.affordability).map((step, i) => (
                     <li key={i} className="flex gap-3 text-foreground">
                       <span className="text-primary font-bold">→</span>
                       <span>{step}</span>

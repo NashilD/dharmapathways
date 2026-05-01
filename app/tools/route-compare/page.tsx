@@ -4,25 +4,8 @@ import { useState, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
-
-interface RouteData {
-  name: string;
-  years: number;
-  qualificationType: string;
-  faculty: string;
-  cost: number;
-  duration: number;
-  support: string;
-  certainty: number;
-}
-
-interface RouteResult {
-  optionA: RouteData;
-  optionB: RouteData;
-  riskA: number;
-  riskB: number;
-  safer: string;
-}
+import type { RouteData, RouteResult, RouteBestDecision } from '@/backend/types';
+import { calculateRouteRisk, getRiskLabel, getRiskColor } from '@/backend/scoring';
 
 export default function RouteCompare() {
   const [optionA, setOptionA] = useState<RouteData>({
@@ -61,28 +44,6 @@ export default function RouteCompare() {
     }
   }, []);
 
-  const calculateRisk = (option: RouteData): number => {
-    let risk = 50; // baseline
-
-    // Cost factor (0-30 points)
-    if (option.cost > 100000) risk += 30;
-    else if (option.cost > 60000) risk += 20;
-    else if (option.cost > 30000) risk += 10;
-
-    // Duration factor (0-20 points)
-    if (option.duration > 4) risk += 20;
-    else if (option.duration > 3) risk += 10;
-
-    // Support factor (0-20 points)
-    if (option.support === 'none') risk += 20;
-    else if (option.support === 'partial') risk += 10;
-
-    // Certainty factor (0-30 points, inverted)
-    risk += (100 - option.certainty) * 0.3;
-
-    return Math.min(100, Math.round(risk));
-  };
-
   const handleCompare = () => {
     if (!optionA.qualificationType || !optionA.faculty || !optionB.qualificationType || !optionB.faculty) {
       alert('Please select all qualification details for both options');
@@ -95,8 +56,8 @@ export default function RouteCompare() {
     optionA.name = optionAName;
     optionB.name = optionBName;
 
-    const riskA = calculateRisk(optionA);
-    const riskB = calculateRisk(optionB);
+    const riskA = calculateRouteRisk(optionA);
+    const riskB = calculateRouteRisk(optionB);
 
     const finalResult: RouteResult = {
       optionA,
@@ -121,20 +82,6 @@ export default function RouteCompare() {
     } else {
       setOptionB({ ...optionB, [field]: value });
     }
-  };
-
-  const getRiskColor = (risk: number): string => {
-    if (risk < 30) return 'text-green-600';
-    if (risk < 50) return 'text-yellow-600';
-    if (risk < 70) return 'text-orange-600';
-    return 'text-red-600';
-  };
-
-  const getRiskLabel = (risk: number): string => {
-    if (risk < 30) return 'Low Risk';
-    if (risk < 50) return 'Moderate Risk';
-    if (risk < 70) return 'High Risk';
-    return 'Very High Risk';
   };
 
   const determineBestRoute = (): { best: 'A' | 'B' | 'Equal'; reasons: string[] } => {
@@ -572,15 +519,21 @@ export default function RouteCompare() {
                     setResult(null);
                     setOptionA({
                       name: '',
+                      years: 3,
+                      qualificationType: '',
+                      faculty: '',
                       cost: 0,
-                      duration: 0,
+                      duration: 3,
                       support: 'none',
                       certainty: 50,
                     });
                     setOptionB({
                       name: '',
+                      years: 3,
+                      qualificationType: '',
+                      faculty: '',
                       cost: 0,
-                      duration: 0,
+                      duration: 3,
                       support: 'none',
                       certainty: 50,
                     });

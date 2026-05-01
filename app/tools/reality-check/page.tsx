@@ -4,19 +4,18 @@ import { useState, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
-
-interface PressureResult {
-  breakdown: Record<string, number>;
-  total: number;
-  category: string;
-  missingMiddle: boolean;
-  drivers: string[];
-  nextSteps: string[];
-}
+import type { PressureResult, PressureInput } from '@/backend/types';
+import {
+  calculatePressureScores,
+  getPressureCategory,
+  detectMissingMiddle,
+  getPressureDrivers,
+} from '@/backend/scoring';
+import { getPressureNextSteps } from '@/backend/calculations';
 
 export default function RealityCheck() {
   const [step, setStep] = useState(1);
-  const [data, setData] = useState({
+  const [data, setData] = useState<PressureInput>({
     income: 0,
     dependents: 0,
     expenses: 0,
@@ -38,122 +37,12 @@ export default function RealityCheck() {
     setData({ ...data, [field]: value });
   };
 
-  const calculateScores = () => {
-    const breakdown: Record<string, number> = {
-      household: 0,
-      financial: 0,
-      study: 0,
-      support: 0,
-    };
-
-    // Household pressure
-    if (data.income < 10000) breakdown.household += 80;
-    else if (data.income < 20000) breakdown.household += 60;
-    else if (data.income < 35000) breakdown.household += 40;
-    else breakdown.household += 20;
-
-    if (data.dependents >= 4) breakdown.household += 20;
-    else if (data.dependents >= 2) breakdown.household += 10;
-
-    breakdown.household = Math.min(breakdown.household, 100);
-
-    // Financial pressure
-    const ratio = data.income > 0 ? data.expenses / data.income : 1;
-
-    if (ratio > 0.8) breakdown.financial += 80;
-    else if (ratio > 0.6) breakdown.financial += 60;
-    else breakdown.financial += 30;
-
-    if (data.debt) breakdown.financial += 20;
-
-    breakdown.financial = Math.min(breakdown.financial, 100);
-
-    // Study cost pressure
-    if (data.studyCost > 80000) breakdown.study += 80;
-    else if (data.studyCost > 40000) breakdown.study += 60;
-    else breakdown.study += 30;
-
-    // Support level
-    if (data.support === 'none') breakdown.support = 100;
-    else if (data.support === 'partial') breakdown.support = 60;
-    else breakdown.support = 20;
-
-    const total =
-      breakdown.household * 0.25 +
-      breakdown.financial * 0.3 +
-      breakdown.study * 0.25 +
-      breakdown.support * 0.2;
-
-    return { breakdown, total };
-  };
-
-  const getCategory = (score: number): string => {
-    if (score < 30) return 'More Stable';
-    if (score < 50) return 'Vulnerable';
-    if (score < 70) return 'Pressured';
-    if (score < 85) return 'Highly Pressured';
-    return 'Severely Pressured';
-  };
-
-  const detectMissingMiddle = (): boolean => {
-    const ratio = data.income > 0 ? data.expenses / data.income : 1;
-    return (
-      data.income >= 15000 &&
-      data.income <= 40000 &&
-      data.support !== 'full' &&
-      ratio > 0.6
-    );
-  };
-
-  const getDrivers = (breakdown: Record<string, number>): string[] => {
-    const drivers: string[] = [];
-
-    if (breakdown.financial > 70)
-      drivers.push('High monthly expenses relative to income');
-    if (breakdown.study > 60) drivers.push('High study cost burden');
-    if (breakdown.support > 70) drivers.push('Limited or no confirmed support');
-    if (data.debt) drivers.push('Existing debt commitments increasing pressure');
-    if (data.dependents >= 3)
-      drivers.push('Multiple dependents increasing household pressure');
-
-    return drivers;
-  };
-
-  const getNextSteps = (category: string): string[] => {
-    if (category === 'Severely Pressured')
-      return [
-        'Avoid committing to high-cost options immediately',
-        'Explore lower-cost or step-in pathways',
-        'Seek guidance before making financial commitments',
-      ];
-
-    if (category === 'Highly Pressured')
-      return [
-        'Compare safer, lower-cost study routes',
-        'Confirm support before committing',
-        'Stress-test affordability using cost calculator',
-      ];
-
-    if (category === 'Pressured')
-      return [
-        'Carefully compare multiple options',
-        'Plan for hidden costs',
-        'Avoid overcommitting financially',
-      ];
-
-    return [
-      'Continue planning carefully',
-      'Validate affordability with full cost breakdown',
-      'Ensure chosen path aligns with your goals',
-    ];
-  };
-
   const handleSubmit = () => {
-    const { breakdown, total } = calculateScores();
-    const category = getCategory(total);
-    const missingMiddle = detectMissingMiddle();
-    const drivers = getDrivers(breakdown);
-    const nextSteps = getNextSteps(category);
+    const { breakdown, total } = calculatePressureScores(data);
+    const category = getPressureCategory(total);
+    const missingMiddle = detectMissingMiddle(data);
+    const drivers = getPressureDrivers(breakdown, data);
+    const nextSteps = getPressureNextSteps(category);
 
     const finalResult: PressureResult = {
       breakdown,
