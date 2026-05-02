@@ -24,10 +24,27 @@ export default function CostCalculator() {
   const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('dharma_cost_calculator');
-    if (saved) {
-      setResult(JSON.parse(saved));
-      setShowResult(true);
+    // Flow guard: Only restore results if session flag exists
+    // This prevents auto-rendering on page reload or direct visits
+    const sessionFlag = sessionStorage.getItem('dharma_cost_calculator_started');
+    
+    if (sessionFlag) {
+      // User intentionally completed the form in this session
+      const saved = localStorage.getItem('dharma_cost_calculator');
+      if (saved) {
+        try {
+          setResult(JSON.parse(saved));
+          setShowResult(true);
+        } catch (e) {
+          // Invalid stored data, clear it
+          localStorage.removeItem('dharma_cost_calculator');
+          sessionStorage.removeItem('dharma_cost_calculator_started');
+        }
+      }
+    } else {
+      // First visit or page reload - always start with input form
+      // Clear any stale persisted data
+      localStorage.removeItem('dharma_cost_calculator');
     }
   }, []);
 
@@ -37,6 +54,8 @@ export default function CostCalculator() {
 
   const calculate = () => {
     const result = calculateCostBreakdown(data);
+    // Set session flag to allow result restoration in the same session
+    sessionStorage.setItem('dharma_cost_calculator_started', 'true');
     setResult(result);
     localStorage.setItem('dharma_cost_calculator', JSON.stringify(result));
     setShowResult(true);
@@ -236,6 +255,10 @@ export default function CostCalculator() {
                 </Link>
                 <button
                   onClick={() => {
+                    // Clear session and persisted data
+                    sessionStorage.removeItem('dharma_cost_calculator_started');
+                    localStorage.removeItem('dharma_cost_calculator');
+                    
                     setShowResult(false);
                     setResult(null);
                     setData({

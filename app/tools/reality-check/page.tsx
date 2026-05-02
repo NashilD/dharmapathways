@@ -26,18 +26,58 @@ export default function RealityCheck() {
   const [result, setResult] = useState<PressureResult | null>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('dharma_reality_check');
-    if (saved) {
-      setResult(JSON.parse(saved));
-      setStep(5);
+    // Flow guard: Only restore results if session flag exists
+    // This prevents auto-rendering on page reload or direct visits
+    const sessionFlag = sessionStorage.getItem('dharma_reality_check_started');
+    
+    if (sessionFlag) {
+      // User intentionally completed the form in this session
+      const saved = localStorage.getItem('dharma_reality_check');
+      if (saved) {
+        try {
+          setResult(JSON.parse(saved));
+          setStep(5);
+        } catch (e) {
+          // Invalid stored data, clear it
+          localStorage.removeItem('dharma_reality_check');
+          sessionStorage.removeItem('dharma_reality_check_started');
+        }
+      }
+    } else {
+      // First visit or page reload - always start with input form
+      // Clear any stale persisted data
+      clearRealityCheckStorage();
+      setStep(1);
     }
   }, []);
+
+  const clearRealityCheckStorage = () => {
+    localStorage.removeItem('dharma_reality_check');
+    localStorage.removeItem('realityCheckData');
+    localStorage.removeItem('realityCheckScore');
+    localStorage.removeItem('realityCheckStep');
+    sessionStorage.removeItem('dharma_reality_check_started');
+  };
+
+  const isInputValid = (input: PressureInput) => {
+    return (
+      input.dependents >= 0 &&
+      input.expenses >= 0 &&
+      input.studyCost >= 0 &&
+      ['none', 'partial', 'full'].includes(input.support) &&
+      (input.income > 0 || input.expenses > 0 || input.studyCost > 0)
+    );
+  };
 
   const update = (field: string, value: any) => {
     setData({ ...data, [field]: value });
   };
 
   const handleSubmit = () => {
+    if (!isInputValid(data)) {
+      setStep(1);
+      return;
+    }
     const { breakdown, total } = calculatePressureScores(data);
     const category = getPressureCategory(total);
     const missingMiddle = detectMissingMiddle(data);
@@ -53,6 +93,9 @@ export default function RealityCheck() {
       nextSteps,
     };
 
+    // Set session flag to allow result restoration in the same session
+    sessionStorage.setItem('dharma_reality_check_started', 'true');
+    
     setResult(finalResult);
     localStorage.setItem('dharma_reality_check', JSON.stringify(finalResult));
     setStep(5);
@@ -305,6 +348,10 @@ export default function RealityCheck() {
                 </Link>
                 <button
                   onClick={() => {
+                    // Clear session and persisted data
+                    sessionStorage.removeItem('dharma_reality_check_started');
+                    localStorage.removeItem('dharma_reality_check');
+                    
                     setStep(1);
                     setData({
                       income: 0,
